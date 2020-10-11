@@ -35,17 +35,20 @@ def create_venv(path, packages=[]):
 	
 	See https://docs.python.org/3/library/venv.html for more information
 	"""
+	logging.info("Creating virtual environment...")
 	venv.create(path, clear=True, symlinks=False, with_pip=True)
 	
 	if os.name == 'nt': python = os.path.join(path, "Scripts", "python.exe")
 	else: python = os.path.join(path, "bin", "python")
 	
+	n = 1
 	for pkg in packages:
 		try:
-			logging.info("Installing {0}...".format(pkg))
+			logging.info("Installing {0}...{1:>{2}}[{3}/{4}]".format(pkg, ' ', abs(25-len(pkg)), n, len(packages)))
 			check_call([python, "-m", "pip", "install", pkg], stdout=DEVNULL, stderr=STDOUT)
 		except CalledProcessError:
 			logging.warning("{0} install failed.".format(pkg))
+		n += 1
 
 def parse_requirements(requirements):
 	"""Read requirement files and return list of packages"""
