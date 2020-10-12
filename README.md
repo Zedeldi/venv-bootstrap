@@ -17,6 +17,10 @@ It accepts a space-delimited list of packages and/or requirement files. The [`ve
 
 ### Usage
 
+Specify additional options to pip:
+
+`--pipopts "--proxy [user:passwd@]proxy.server:port"`
+
 To create a venv from a different project, use the following:
 
 ```python

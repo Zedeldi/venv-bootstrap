@@ -29,7 +29,7 @@ from argparse import ArgumentParser
 from shutil import make_archive
 from subprocess import run, PIPE, STDOUT
 
-def create_venv(path, packages=[]):
+def create_venv(path, packages=[], pip_opts=[]):
 	"""
 	Create venv and install specified packages
 	
@@ -44,7 +44,7 @@ def create_venv(path, packages=[]):
 	n = 1; err = []
 	for pkg in packages:
 		logging.info("Installing {0}...{1:>{2}}[{3}/{4}]".format(pkg, ' ', abs(25-len(pkg)), n, len(packages)))
-		pip = run([python, "-m", "pip", "install", pkg], stdout=PIPE, stderr=STDOUT, universal_newlines=True)
+		pip = run([python, "-m", "pip", "install", *pip_opts, pkg], stdout=PIPE, stderr=STDOUT, universal_newlines=True)
 		if pip.returncode != 0:
 			logging.warning("{0} install failed.".format(pkg))
 			logging.debug("Error message:\n===\n{0}===".format(pip.stdout))
@@ -79,6 +79,7 @@ if __name__ == "__main__":
 	parser.add_argument("directory", type=str, help="path for the virtual environment")
 	parser.add_argument("-p", "--packages", type=str, default="", help="space-separated string of packages")
 	parser.add_argument("-r", "--requirements", type=str, default="", help="space-separated string of requirements files")
+	parser.add_argument("-o", "--pipopts", type=str, default="", help="additional arguments to pass to pip")
 	parser.add_argument("-l", "--log", type=str, default=None, help="output log into a file")
 	group = parser.add_mutually_exclusive_group()
 	group.add_argument("-q", "--quiet", action="store_const", const=-1, default=0, dest="verbosity", help="only display warnings")
@@ -103,9 +104,10 @@ if __name__ == "__main__":
 	DIRECTORY = args.directory
 	PACKAGES = args.packages.split()
 	REQUIREMENTS = args.requirements.split()
+	PIP_OPTS = args.pipopts.split()
 	PACKAGES.extend(parse_requirements(REQUIREMENTS))
 	
-	err = create_venv(DIRECTORY, PACKAGES)
+	err = create_venv(DIRECTORY, PACKAGES, PIP_OPTS)
 	archive(DIRECTORY)
 	if err:
 		padding = "\n{0:>13}".format(' ')
