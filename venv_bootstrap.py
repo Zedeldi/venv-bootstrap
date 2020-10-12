@@ -27,7 +27,7 @@ Cross-platform support
 import logging, os, venv
 from argparse import ArgumentParser
 from shutil import make_archive
-from subprocess import check_call, CalledProcessError, DEVNULL, STDOUT
+from subprocess import run, PIPE, STDOUT
 
 def create_venv(path, packages=[]):
 	"""
@@ -41,14 +41,16 @@ def create_venv(path, packages=[]):
 	if os.name == 'nt': python = os.path.join(path, "Scripts", "python.exe")
 	else: python = os.path.join(path, "bin", "python")
 	
-	n = 1
+	n = 1; err = []
 	for pkg in packages:
-		try:
-			logging.info("Installing {0}...{1:>{2}}[{3}/{4}]".format(pkg, ' ', abs(25-len(pkg)), n, len(packages)))
-			check_call([python, "-m", "pip", "install", pkg], stdout=DEVNULL, stderr=STDOUT)
-		except CalledProcessError:
+		logging.info("Installing {0}...{1:>{2}}[{3}/{4}]".format(pkg, ' ', abs(25-len(pkg)), n, len(packages)))
+		pip = run([python, "-m", "pip", "install", pkg], stdout=PIPE, stderr=STDOUT, universal_newlines=True)
+		if pip.returncode != 0:
 			logging.warning("{0} install failed.".format(pkg))
+			logging.debug("Error message:\n===\n{0}===".format(pip.stdout))
+			err.append(pkg)
 		n += 1
+	return err
 
 def parse_requirements(requirements):
 	"""Read requirement files and return list of packages"""
@@ -103,6 +105,12 @@ if __name__ == "__main__":
 	REQUIREMENTS = args.requirements.split()
 	PACKAGES.extend(parse_requirements(REQUIREMENTS))
 	
-	create_venv(DIRECTORY, PACKAGES)
+	err = create_venv(DIRECTORY, PACKAGES)
 	archive(DIRECTORY)
+	if err:
+		padding = "\n{0:>13}".format(' ')
+		logging.warning("The following packages failed to install:{0}{1}".format(
+			padding,
+			padding.join(err)
+		))
 	logging.info("Done! :)")
