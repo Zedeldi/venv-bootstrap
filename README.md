@@ -1,6 +1,6 @@
 # venv-bootstrap
 
-[![GitHub license](https://img.shields.io/github/license/Zedeldi/venv-bootstrap?style=flat-square)](https://github.com/Zedeldi/venv-bootstrap/blob/master/LICENSE) [![GitHub last commit](https://img.shields.io/github/last-commit/Zedeldi/venv-bootstrap?style=flat-square)](https://github.com/Zedeldi/venv-bootstrap/commits)
+[![GitHub license](https://img.shields.io/github/license/Zedeldi/venv-bootstrap?style=flat-square)](https://github.com/Zedeldi/venv-bootstrap/blob/master/LICENSE) [![GitHub last commit](https://img.shields.io/github/last-commit/Zedeldi/venv-bootstrap?style=flat-square)](https://github.com/Zedeldi/venv-bootstrap/commits) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg?style=flat-square)](https://github.com/psf/black)
 
 Small Python script to bootstrap a virtual environment, with specified packages.
 
