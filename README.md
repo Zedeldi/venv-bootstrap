@@ -13,7 +13,10 @@ It accepts a space-delimited list of packages and/or requirement files. The [`ve
 ## Installation
 
 1. Clone this repo: `git clone https://github.com/Zedeldi/venv-bootstrap.git`
-2. Run: `python3 venv_bootstrap.py -r requirements.txt -p "foo bar baz" .venv`
+2. Install build: `pip3 install build`
+3. Build: `python3 -m build`
+4. Install wheel: `pip3 install dist/venv_bootstrap-*-py3-none-any.whl`
+5. Run: `venv-bootstrap -r requirements.txt -p "foo bar baz" .venv`
 
 ### Usage
 
