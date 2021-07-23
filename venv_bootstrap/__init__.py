@@ -68,7 +68,7 @@ def parse_requirements(requirements: list[str]) -> list[str]:
         try:
             for line in open(req, "r").readlines():
                 pkg = line.strip()
-                if not pkg.startswith("#"):
+                if pkg and not pkg.startswith("#"):
                     packages.append(pkg)
             # Alternatively, let pip handle requirements
             # open(req, 'r').close()
