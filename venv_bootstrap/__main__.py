@@ -1,10 +1,13 @@
+"""Entry point for venv-bootstrap."""
+
 import logging
 from argparse import ArgumentParser
 
-from venv_bootstrap import create_venv, parse_requirements, archive
+from venv_bootstrap import archive, create_venv, parse_requirements
 
 
-def main():
+def main() -> None:
+    """Parse arguments and create virtual environment."""
     parser = ArgumentParser(
         prog="venv-bootstrap",
         description="venv-bootstrap - Copyright (C) 2020 Zack Didcott",

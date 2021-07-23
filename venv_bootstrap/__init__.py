@@ -20,7 +20,7 @@ import logging
 import os
 import venv
 from shutil import make_archive
-from subprocess import run, PIPE, STDOUT
+from subprocess import PIPE, STDOUT, run
 
 
 def create_venv(
