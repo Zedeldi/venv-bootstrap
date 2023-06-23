@@ -10,7 +10,7 @@ def main() -> None:
     """Parse arguments and create virtual environment."""
     parser = ArgumentParser(
         prog="venv-bootstrap",
-        description="venv-bootstrap - Copyright (C) 2020 Zack Didcott",
+        description="venv-bootstrap - Copyright (C) 2023 Zack Didcott",
     )
     parser.add_argument(
         "directory", type=str, help="path for the virtual environment"
