@@ -38,14 +38,14 @@ create_venv(".venv", parse_requirements(["requirements.txt"]))
 
 ## License
 
-venv-bootstrap is licensed under the GPL v3 for everyone to use, modify and share freely.
+`venv-bootstrap` is licensed under the [MIT Licence](https://mit-license.org/) for everyone to use, modify and share freely.
 
-This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-
-[![GPL v3 Logo](https://www.gnu.org/graphics/gplv3-127x51.png)](https://www.gnu.org/licenses/gpl-3.0-standalone.html)
+This program is distributed in the hope that it will be useful, but without any warranty.
 
 ## Donate
 
 If you found this project useful, please consider donating. Any amount is greatly appreciated! Thank you :smiley:
+
+[![PayPal](https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-150px.png)](https://paypal.me/ZackDidcott)
 
 My bitcoin address is: [bc1q5aygkqypxuw7cjg062tnh56sd0mxt0zd5md536](bitcoin://bc1q5aygkqypxuw7cjg062tnh56sd0mxt0zd5md536)
